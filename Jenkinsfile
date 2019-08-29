@@ -1,32 +1,10 @@
-pipeline {
-    agent any
-    
-    stages {
-        stage ('Package Stage') {
-
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn clean package'
-                }
-            }
-        }
-
-        stage ('Testing Stage') {
-
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn test'
-                }
-            }
-        }
-
-
-        stage ('Deployment Stage') {
-            steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn deploy'
-                }
-            }
-        }
-    }
+node {
+   stage('SCM Checkout'){
+	git 'https://github.com/venki2211/maven-sample'
+   }
+   stage('Compile-Package'){
+	   // Get maven home path 
+	   def mvnHome = tool name: 'maven', type: 'maven'
+	   sh "${mvnHome}/bin/mvn package"
+   }
 }
