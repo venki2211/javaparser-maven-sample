@@ -12,6 +12,12 @@ node {
 	   withSonarQubeEnv('sonarserver') {
 	   sh "${mvnHome}/bin/mvn sonar:sonar"
  }
-
+	   stage('Slack Notification'){
+	   slackSend baseUrl: 'https://hooks.slack.com/services/', 
+		   channel: '#sample-project', 
+		   color: 'Good', 
+		   message: 'Welcome to DXC Slack', 
+		   tokenCredentialId: 'slack-secret'
+	   }
    }
 }
