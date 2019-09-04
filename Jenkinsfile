@@ -9,7 +9,7 @@ node {
    }
    stage('SonarQube Analysis'){
 	   withSonarQubeEnv('sonarserver') {
-           sh "${scannerHome}/bin/sonar-scanner"
+           sh "${mvnHome}/bin/mvn sonar:sonar"
  }
 	   stage('Slack Notification'){
 	   slackSend baseUrl: 'https://hooks.slack.com/services/', 
