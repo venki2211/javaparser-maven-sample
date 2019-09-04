@@ -8,10 +8,8 @@ node {
 	   sh "${mvnHome}/bin/mvn package"
    }
    stage('SonarQube Analysis'){
-	   # withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]){
 	   withSonarQubeEnv('sonarserver') {
            sh "${scannerHome}/bin/sonar-scanner"
-	   # sh "${mvnHome}/bin/mvn sonar:sonar"
  }
 	   stage('Slack Notification'){
 	   slackSend baseUrl: 'https://hooks.slack.com/services/', 
