@@ -8,7 +8,7 @@ node {
 	   sh "${mvnHome}/bin/mvn package"
    }
    stage('SonarQube analysis') {
-    withSonarQubeEnv(credentialsId: '9d3da743bc7b22699ded27ad934b06c4d3d436e7', installationName: 'sonarserver') { // You can override the credential to be used
+    withSonarQubeEnv('sonarserver') { // You can override the credential to be used
       sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
     }
 	   stage('Slack Notification'){
