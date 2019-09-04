@@ -8,7 +8,7 @@ node {
 	   sh "${mvnHome}/bin/mvn package"
    }
    stage('SonarQube Analysis'){
-	   withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]) {
+	   withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]){
 	   withSonarQubeEnv('sonarserver') {
 	   sh "${mvnHome}/bin/mvn sonar:sonar"
  }
