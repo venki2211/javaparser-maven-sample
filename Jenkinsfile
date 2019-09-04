@@ -1,3 +1,5 @@
+#!/usr/bin/groovy
+
 node {
    stage('SCM Checkout'){
 	git 'https://github.com/venki2211/maven-sample'
