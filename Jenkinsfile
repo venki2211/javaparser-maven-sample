@@ -1,4 +1,4 @@
-#!/usr/bin/
+#!/usr/bin/groovy
 
 node {
    stage('SCM Checkout'){
@@ -11,6 +11,7 @@ node {
    }
    stage('SonarQube analysis'){
 	   withSonarQubeEnv('sonarserver'){
+		   sh "/opt/sonar-scanner-4.0.0.1744-linux/bin/sonar-scanner -D sonar.host.url=http://3.219.234.113:9000 -D sonar.login=9d3da743bc7b22699ded27ad934b06c4d3d436e7 -D sonar-project.properties"
  }
 	   stage('Slack Notification'){
 	   slackSend baseUrl: 'https://hooks.slack.com/services/', 
