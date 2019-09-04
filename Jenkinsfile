@@ -8,7 +8,8 @@ node {
 	   sh "${mvnHome}/bin/mvn package"
    }
    stage('SonarQube Analysis'){
-	   def mvnHome = tool name: 'maven', type: 'maven'
+	   def scannerHome = tool 'sonar-scanner-4.0.0.1744-linux'
+	   withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]) {
 	   withSonarQubeEnv('sonarserver') {
 	   sh "${mvnHome}/bin/mvn sonar:sonar"
  }
@@ -18,6 +19,7 @@ node {
 		   color: 'Good', 
 		   message: 'Welcome to DXC Slack', 
 		   tokenCredentialId: 'slack-secret'
+	   }
 	   }
    }
 }
