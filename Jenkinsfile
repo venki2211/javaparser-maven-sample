@@ -1,4 +1,4 @@
-#!/usr/bin/groovy
+#!/usr/bin/
 
 node {
    stage('SCM Checkout'){
