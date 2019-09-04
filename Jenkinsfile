@@ -8,7 +8,8 @@ node {
 	   sh "${mvnHome}/bin/mvn package"
    }
    stage('SonarQube Analysis'){
-	   withSonarQubeEnv('sonarserver') {
+	   withSonarQubeEnv('sonarserver'){
+	   sh 'mvn clean package sonar:sonar'
  }
 	   stage('Slack Notification'){
 	   slackSend baseUrl: 'https://hooks.slack.com/services/', 
