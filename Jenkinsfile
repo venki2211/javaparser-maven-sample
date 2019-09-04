@@ -8,7 +8,7 @@ node {
 	   sh "${mvnHome}/bin/mvn package"
    }
    stage('SonarQube Analysis'){
-	   def scannerHome = tool 'sonar-scanner-4.0.0.1744-linux'
+	   def scannerHome = tool 'SonarScanner 4.0';
 	   withCredentials([string(credentialsId: 'sonar-token', variable: 'sonar-token')]) {
 	   withSonarQubeEnv('sonarserver') {
 	   sh "${mvnHome}/bin/mvn sonar:sonar"
