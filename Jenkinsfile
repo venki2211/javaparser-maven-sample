@@ -9,7 +9,7 @@ node {
    }
    stage('SonarQube analysis') {
 	                    withSonarQubeEnv('sonarserver') {
-	                        sh '/opt/sonar-scanner-4.0.0.1744-linux -D sonar.host.url=http://35.169.107.7:9000 -D sonar.login=9d3da743bc7b22699ded27ad934b06c4d3d436e7 -D sonar-project.properties'
+	                        sh '/opt/sonar/sonar-scanner-4.0.0.1744-linux/bin/sonar -D sonar.host.url=http://35.169.107.7:9000 -D sonar.login=9d3da743bc7b22699ded27ad934b06c4d3d436e7 -D sonar-project.properties'
 	                    }
 
 	   stage('Slack Notification'){
