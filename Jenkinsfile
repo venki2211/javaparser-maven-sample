@@ -8,7 +8,7 @@ node {
 	   sh "${mvnHome}/bin/mvn package"
    }
    stage('SonarQube Analysis') {
-        def sonarUrl = 'sonar.host.url=http://35.169.107.7:9000'
+        def mvn = tool (name: 'maven', type: 'maven') + '/bin/mvn'
         withSonarQubeEnv('sonarserver') { 
           sh "${mvnHome}/bin/mvn sonar:sonar"
         }
