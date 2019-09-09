@@ -12,6 +12,19 @@ node {
         withSonarQubeEnv('sonarserver') { 
           sh "${mvnHome}/bin/mvn sonar:sonar"
         }
+	   stage("Quality Gate"){
+          timeout(time: 1, unit: 'HOURS') {
+              def qg = waitForQualityGate()
+              if (qg.status != 'OK') {
+		   slackSend baseUrl: 'https://hooks.slack.com/services/', 
+		   channel: '#sample-project', 
+		   color: 'Danger', 
+		   message: 'Welcome to DXC Slack', 
+		   tokenCredentialId: 'slack-secret'
+                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
+              }
+          }
+      }
 
 	   stage('Slack Notification'){
 	   slackSend baseUrl: 'https://hooks.slack.com/services/', 
